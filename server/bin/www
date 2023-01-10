@@ -5,7 +5,7 @@
  */
 
 const app = require('../app');
-const debug = require('debug')('backend-menu-restaurant:server');
+const debug = require('debug')('Proyecto3-RollingCode:server');
 const http = require('http');
 
 /**
