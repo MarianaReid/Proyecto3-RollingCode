@@ -3,9 +3,8 @@ const { Schema } = mongoose;
 
 const orderSchema = new Schema(
   {
-    users: { type: Schema.Types.ObjectId, ref: 'users' },
-    products: [{ type: Schema.Types.ObjectId, ref: 'products' }],
-    total: {
+    products: { type: Schema.Types.ObjectId, ref: 'products' },
+    count: {
       type: Number,
       required: true,
     },
