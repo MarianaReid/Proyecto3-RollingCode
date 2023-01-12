@@ -3,7 +3,7 @@ const Order = require("../models/OrderModel");
 
 const getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ isDeleted: false }).populate('users').populate('products');
+    const orders = await Order.find({ isDeleted: false }).populate('products');
     res.status(200).json(orders);
   } catch (error) {
     console.log(error);
@@ -18,7 +18,7 @@ const getOneOrder = async (req, res) => {
     if (!ObjectId.isValid(id)) {
       return res.status(400).json("Id is not valid");
     }
-    const order = await Order.findById(id).populate('users').populate('products');
+    const order = await Order.findById(id).populate('products');
     if (!order) {
       return res.status(404).json("order not found");
     } else {
