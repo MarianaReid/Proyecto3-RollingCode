@@ -3,7 +3,7 @@ const Cart = require("../models/CartModel");
 
 const getAllCarts = async (req, res) => {
   try {
-    const carts = await Cart.find({ isDeleted: false }).populate('users').populate('products');
+    const carts = await Cart.find({ isDeleted: false }).populate('users').populate('orders');
     res.status(200).json(carts);
   } catch (error) {
     console.log(error);
@@ -18,7 +18,7 @@ const getOneCart = async (req, res) => {
     if (!ObjectId.isValid(id)) {
       return res.status(400).json("Id is not valid");
     }
-    const cart = await Cart.findById(id).populate('users').populate('products');
+    const cart = await Cart.findById(id).populate('users').populate('orders');
     if (!cart) {
       return res.status(404).json("cart not found");
     } else {
