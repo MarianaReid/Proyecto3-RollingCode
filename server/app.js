@@ -9,6 +9,7 @@ const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
 const categoriesRoutes = require('./routes/categories');
 const ordersRoutes = require('./routes/orders');
+const cartsRoutes = require('./routes/carts');
 dotenv.config();
 const app = express();
 
@@ -38,5 +39,6 @@ app.use('/api', userRoutes);
 app.use('/api', productRoutes);
 app.use('/api', categoriesRoutes);
 app.use('/api', ordersRoutes);
+app.use('/api', cartsRoutes);
 
 module.exports = app;
