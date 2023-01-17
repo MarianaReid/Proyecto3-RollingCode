@@ -41,5 +41,5 @@ const userSchema = new Schema({
 }
 )
 
-productSchema.plugin(mongoosePaginate);
+userSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('users', userSchema);
