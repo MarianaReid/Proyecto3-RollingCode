@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const { roles } = require('../constants/enum');
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const userSchema = new Schema({
   name: { 
@@ -40,4 +41,5 @@ const userSchema = new Schema({
 }
 )
 
+productSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('users', userSchema);
