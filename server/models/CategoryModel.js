@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const categorySchema = new Schema(
   {
@@ -25,4 +26,6 @@ const categorySchema = new Schema(
     versionKey: false,
   }
 );
+
+categorySchema.plugin(mongoosePaginate);
 module.exports = mongoose.model("categories", categorySchema);
