@@ -1,5 +1,5 @@
 const roles = {
-  CLIENTE: 'CLIENTE',
+  CLIENT: 'CLIENT',
   ADMIN: 'ADMIN',
 }
 
