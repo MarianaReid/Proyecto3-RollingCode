@@ -12,8 +12,8 @@ const { isLoggedIn, checkRole } = require('../middleware/auth');
 
 router.get('/carts', isLoggedIn, getAllCarts);
 router.get('/cart/:id', isLoggedIn, getOneCart);
-router.post('/cart', isLoggedIn, createCart);
-router.put('/cart/:id', isLoggedIn, updateCart);
-router.delete('/cart/:id', isLoggedIn, deleteCart);
+router.post('/cart', checkRole(roles.CLIENT), createCart);
+router.put('/cart/:id', checkRole(roles.CLIENT), updateCart);
+router.delete('/cart/:id', checkRole(roles.CLIENT), deleteCart);
 
 module.exports = router;
