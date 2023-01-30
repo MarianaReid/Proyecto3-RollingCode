@@ -1,12 +1,11 @@
 const User = require('../models/UserModel');
 
-const options = {
-  page: 1,
-  limit: 3
-};
-
 const userService = {
-  findAll: async (filter) => {
+  findAll: async (filter, page) => {
+    const options = {
+      page,
+      limit: 3
+    };
     return await User.paginate({filter}, options);
   },
   saveUser: async (user) => {

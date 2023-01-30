@@ -8,7 +8,8 @@ const { templateRegister } = require("../utils/templateEmails");
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await userService.findAll({isDeleted: false});
+    const page = parseInt(req.query.page,10) || 1;
+    const users = await userService.findAll({isDeleted: false}, page);
     res.status(200).json(users);
   } catch (error) {
     console.log(error);
