@@ -28,7 +28,7 @@ const createUser = async (req, res) => {
     }
     const newUser = await userService.saveUser(userSave);
     const JwtToken = token({id: newUser._id, role: newUser.role});
-    sendEmail({
+    await sendEmail({
       subject: 'Bienvenidos al Restaurante 🕋', 
       text: 'Gracias por registrarte', 
       htmlMsg: templateRegister(newUser.name, newUser._id), 
