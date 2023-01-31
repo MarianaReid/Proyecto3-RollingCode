@@ -25,7 +25,7 @@ Para facilitar el envio de datos a la API se adjuntan modelos para productos, pe
 
 - Modelo: 
 
- json
+ ```json
 {
   "name": "nombre del producto",
   "stock": true,
@@ -34,23 +34,23 @@ Para facilitar el envio de datos a la API se adjuntan modelos para productos, pe
   "categories": "categoria del producto",
   "image": "url de la imagen"
 }
- 
+``` 
 
 ## ▶️ Rama de pedidos 
 
 - Modelo: 
 
- json
+ ```json
 {
     "products":"Nombre del producto",
     "price":100,
 }
- 
+``` 
 
 ## 🙍 Login y registro 
 
  - Modelo Registro: 
- json
+ ```json
 {
     "name":"Nombre de usuario",
     "email":"ejemplo@ejemplo.com",
@@ -59,12 +59,13 @@ Para facilitar el envio de datos a la API se adjuntan modelos para productos, pe
     "role":"rol de la cuenta"
     "state":"estado del perfil"
 }
- 
+``` 
 
   - Modelo Login:
 
- json
+ ```json
 {
     "email":"ejemplo@ejemplo.com",
     "password":"ejemplo"
 }
+``` 
