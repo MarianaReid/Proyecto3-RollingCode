@@ -1,12 +1,12 @@
 const Product = require('../models/productModel')
 
 const productService = {
-    findAllProducts: async (filter, page) => {
+    findAllProducts: async (filter, page, limit) => {
         // return await Product.find(filter).populate('categories')
         // const produ = await Product.find(filter).populate('categories')
         const options = {
             page,
-            limit: 3
+            limit
         };
         return await Product.paginate({ filter }, options)
     },
