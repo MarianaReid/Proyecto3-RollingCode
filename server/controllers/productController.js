@@ -5,7 +5,8 @@ const Product = require("../models/productModel");
 const getAllProducts = async (req, res) => {
   try {
     const page = parseInt(req.query.page,10) || 1;
-    const products = await productService.findAllProducts({ isDeleted: false }, page);
+    const limit = parseInt(req.query.page,10) || 3;
+    const products = await productService.findAllProducts({ isDeleted: false }, page, limit);
     res.status(200).json(products);
   } catch (error) {
     console.log(error);
