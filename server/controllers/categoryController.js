@@ -1,15 +1,16 @@
 const { ObjectId } = require("mongoose").Types;
 const Category = require("../models/CategoryModel");
 
-const options = {
-  populate: 'products',
-  page: 1,
-  limit: 3
-};
-
 const getAllCategories = async (req, res) => {
   try {
     //const categories = await Category.find({ isDeleted: false }).populate('products');
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 3;
+    const options = {
+      populate: 'products',
+      page,
+      limit
+    };
     const categories = await Category.paginate({ isDeleted: false }, options);
     res.status(200).json(categories);
   } catch (error) {
