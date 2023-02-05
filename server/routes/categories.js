@@ -11,7 +11,7 @@ const {
 const { isLoggedIn, checkRole } = require('../middleware/auth');
 
 router.get('/categories', getAllCategories);
-router.get('/category/:id', isLoggedIn, getOneCategory);
+router.get('/category/:id', getOneCategory);
 router.post('/category',checkRole(roles.ADMIN), createCategory);
 router.put('/category/:id',checkRole(roles.ADMIN), updateCategory);
 router.delete('/category/:id',checkRole(roles.ADMIN), deleteCategory);
