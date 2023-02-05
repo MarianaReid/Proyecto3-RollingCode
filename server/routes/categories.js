@@ -10,7 +10,7 @@ const {
 } = require('../controllers/categoryController');
 const { isLoggedIn, checkRole } = require('../middleware/auth');
 
-router.get('/categories', isLoggedIn, getAllCategories);
+router.get('/categories', getAllCategories);
 router.get('/category/:id', isLoggedIn, getOneCategory);
 router.post('/category',checkRole(roles.ADMIN), createCategory);
 router.put('/category/:id',checkRole(roles.ADMIN), updateCategory);
