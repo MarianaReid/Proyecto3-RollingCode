@@ -5,7 +5,7 @@ const {getAllProducts, getOneProduct,createProduct, updateProduct,deleteProduct}
 const { isLoggedIn, checkRole } = require('../middleware/auth');
 
 router.get('/products',getAllProducts);
-router.get('/product/:id',isLoggedIn,getOneProduct);
+router.get('/product/:id',getOneProduct);
 router.post('/createProduct',checkRole(roles.ADMIN), createProduct);
 router.put('/product/:id',checkRole(roles.ADMIN),updateProduct);
 router.delete('/product/:id',checkRole(roles.ADMIN),deleteProduct);
