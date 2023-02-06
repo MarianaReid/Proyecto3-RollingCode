@@ -9,7 +9,10 @@ const getAllProducts = async (req, res) => {
     const search = req.query.search;
     const query = {
       isDeleted: false,
-      name: new RegExp(search, "i"),
+      $or: [
+        { name: new RegExp(search, "i") },
+        { description: new RegExp(search, "i") },
+      ]
     };
     const products = await productService.findAllProducts(query, page, limit);
     res.status(200).json(products);
