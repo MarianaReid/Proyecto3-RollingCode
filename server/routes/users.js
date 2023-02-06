@@ -19,8 +19,8 @@ const { isLoggedIn, checkRole } = require('../middleware/auth');
 
 //router.get('/users', MIDDLEWARE ,getAllUsers);
 
-router.get('/users', isLoggedIn, getAllUsers);
-router.get('/user/:id', isLoggedIn, getOneUser);
+router.get('/users', getAllUsers);
+router.get('/user/:id', getOneUser);
 router.get('/user/active-account/:id', activeAccount);
 router.post('/createUser', createUser);
 router.post('/login', login);
