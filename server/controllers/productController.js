@@ -4,9 +4,17 @@ const Product = require("../models/productModel");
 
 const getAllProducts = async (req, res) => {
   try {
-    const page = parseInt(req.query.page,10) || 1;
-    const limit = parseInt(req.query.limit,10) || 3;
-    const products = await productService.findAllProducts({ isDeleted: false }, page, limit);
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 3;
+    const search = req.query.search;
+    const query = {
+      isDeleted: false,
+      $or: [
+        { name: new RegExp(search, "i") },
+        { description: new RegExp(search, "i") },
+      ]
+    };
+    const products = await productService.findAllProducts(query, page, limit);
     res.status(200).json(products);
   } catch (error) {
     console.log(error);
@@ -27,7 +35,7 @@ const getOneProduct = async (req, res) => {
     } else {
       res.status(200).json(product);
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 const createProduct = async (req, res) => {
@@ -43,20 +51,20 @@ const createProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-    const bodyProduct = req.body;
-    const id = req.params.id;
+  const bodyProduct = req.body;
+  const id = req.params.id;
   try {
-    
+
     if (!ObjectId.isValid(id)) {
       return res.status(400).json("ObjectId is not valid");
     }
-    const updateProduct = await Product.findOneAndUpdate({_id: id},bodyProduct,{ new: true })
+    const updateProduct = await Product.findOneAndUpdate({ _id: id }, bodyProduct, { new: true })
 
     if (updateProduct) {
-        res.status(200).json(updateProduct);
-      } else {
-        res.status(404).json("product not found");
-      }
+      res.status(200).json(updateProduct);
+    } else {
+      res.status(404).json("product not found");
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json('Internal Server Error');
@@ -64,24 +72,24 @@ const updateProduct = async (req, res) => {
 };
 
 const deleteProduct = async (req, res) => {
-    const id = req.params.id;
-    const deleteStatus = {
-        deletedAt: new Date(),
-        isDeleted: true,
-        isActive: false,
-      }
+  const id = req.params.id;
+  const deleteStatus = {
+    deletedAt: new Date(),
+    isDeleted: true,
+    isActive: false,
+  }
   try {
-    
+
     if (!ObjectId.isValid(id)) {
       return res.status(400).json("ObjectId is not valid");
     }
-    const deletedProduct = await Product.findOneAndUpdate({_id: id},deleteStatus,{ new: true })
+    const deletedProduct = await Product.findOneAndUpdate({ _id: id }, deleteStatus, { new: true })
 
     if (deletedProduct) {
-        res.status(200).json(`product deleted = ${deletedProduct.name}`);
-      } else {
-        res.status(404).json("product not found");
-      }
+      res.status(200).json(`product deleted = ${deletedProduct.name}`);
+    } else {
+      res.status(404).json("product not found");
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json('Internal Server Error');
