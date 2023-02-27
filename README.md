@@ -1,13 +1,35 @@
-# Proyecto final – backend – comision 17i
+# Proyecto final – Backend – Comisión 17i
 <p align="center"> <img src="server/logo.png" alt="logo-burgerhouse" height="200" width="200"/> </p>
 
-## 👪 Integrantes 
+## 👪 Integrantes: 
 - [Veronica Menichetti](https://github.com/VMenichetti)
 - [Andressa Arcocha](https://github.com/AndressaArcocha)
 - [Esteban Orrego](https://github.com/eOrrego)
 - [Mariana Reid](https://github.com/MarianaReid)
 - [Enzo Lobo](https://github.com/elobo81)
 - [Emmanuel Rizza](https://github.com/Emmanuelrizza)
+
+## ⬇️ Instalación 
+El Backend de esta página esta deployado en Vercel:
+ Enlace:
+```
+https://proyecto3-rolling-code.vercel.app/api
+```
+
+Para correr en local nuestra api, deberemos llevar  a cabo los siguientes pasos:
+
+1. Clonamos el repositorio
+```
+git clone https://github.com/MarianaReid/Proyecto3-RollingCode
+```
+2. Instalamos todas las dependencias
+```
+npm install
+```
+3. Ejecutamos la aplicacion web
+```
+npm run
+```
 
 ## 🧪 Testeo
 
