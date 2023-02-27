@@ -6,7 +6,7 @@ const userService = {
       page,
       limit
     };
-    return await User.paginate({filter}, options);
+    return await User.paginate(filter, options);
   },
   saveUser: async (user) => {
     const newUser = new User(user);
