@@ -8,6 +8,10 @@ const cartSchema = new Schema(
       type: Array,
       required: true,
     },
+    total: { 
+      type: Number,
+      required: true,
+    },
     isActive: Boolean,
     deletedAt: Date,
     isDeleted: {
