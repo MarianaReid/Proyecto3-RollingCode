@@ -4,8 +4,11 @@ const { Schema } = mongoose;
 const cartSchema = new Schema(
   {
     users: { type: Schema.Types.ObjectId, ref: 'users' },
-    orders: [{ type: Schema.Types.ObjectId, ref: 'orders' }],
-    total: {
+    productsCart: { 
+      type: Array,
+      required: true,
+    },
+    total: { 
       type: Number,
       required: true,
     },

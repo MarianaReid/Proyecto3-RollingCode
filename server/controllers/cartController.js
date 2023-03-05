@@ -3,7 +3,7 @@ const Cart = require("../models/CartModel");
 
 const getAllCarts = async (req, res) => {
   try {
-    const carts = await Cart.find({ isDeleted: false }).populate('users').populate('orders');
+    const carts = await Cart.find({ isDeleted: false }).populate('users');
     res.status(200).json(carts);
   } catch (error) {
     console.log(error);
@@ -18,7 +18,7 @@ const getOneCart = async (req, res) => {
     if (!ObjectId.isValid(id)) {
       return res.status(400).json("Id is not valid");
     }
-    const cart = await Cart.findById(id).populate('users').populate('orders');
+    const cart = await Cart.findById(id).populate('users');
     if (!cart) {
       return res.status(404).json("cart not found");
     } else {
@@ -31,7 +31,7 @@ const getOneCart = async (req, res) => {
 };
 
 const createCart = async (req, res) => {
-  const cartSave = { ...req.body, isActive: true };
+  const cartSave = { ...req.body, isActive: false };
   try {
     const cart = new Cart(cartSave);
     await cart.save();
