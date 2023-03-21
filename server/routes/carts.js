@@ -11,7 +11,7 @@ const {
 const { isLoggedIn } = require('../middleware/auth');
 
 router.get('/carts', isLoggedIn, getAllCarts);
-router.get('/cart/:id', isLoggedIn, getOneCart);
+router.get('/cart/:id', getOneCart);
 router.post('/cart', isLoggedIn, createCart);
 router.put('/cart/:id', isLoggedIn, updateCart);
 router.delete('/cart/:id', isLoggedIn, deleteCart);

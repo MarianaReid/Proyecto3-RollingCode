@@ -8,9 +8,9 @@ const { templateRegister } = require("../utils/templateEmails");
 
 const getAllUsers = async (req, res) => {
   try {
-    const page = parseInt(req.query.page,10) || 1;
-    const limit = parseInt(req.query.limit,10) || 3;
-    const users = await userService.findAll({isDeleted: false}, page, limit);
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 3;
+    const users = await userService.findAll({ isDeleted: false }, page, limit);
     res.status(200).json(users);
   } catch (error) {
     console.log(error);
@@ -24,18 +24,18 @@ const createUser = async (req, res) => {
   try {
     const encryptPass = await encryptedData(password);
     const userSave = {
-      ...req.body, 
+      ...req.body,
       password: encryptPass,
     }
     const newUser = await userService.saveUser(userSave);
-    const JwtToken = token({id: newUser._id, role: newUser.role});
+    const JwtToken = token({ id: newUser._id, role: newUser.role });
     await sendEmail({
-      subject: 'Bienvenidos al Restaurante 🕋', 
-      text: 'Gracias por registrarte', 
-      htmlMsg: templateRegister(newUser.name, newUser._id), 
+      subject: 'Bienvenidos al Restaurante 🕋',
+      text: 'Gracias por registrarte',
+      htmlMsg: templateRegister(newUser.name, newUser._id),
       userEmail: newUser.email,
     })
-    return res.status(201).json({token: JwtToken, userData: {id:foundUser._id, name: newUser.name, role: newUser.role, isVerified: newUser.isActive}});
+    return res.status(201).json({ token: JwtToken, userData: { id: newUser._id, name: newUser.name, role: newUser.role, isVerified: newUser.isActive } });
   } catch (e) {
     if (e.code === 11000) {
       return res.status(409).json('This email has already been registered');
@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const foundUser = await User.findOne({email})
+    const foundUser = await User.findOne({ email })
     if (!foundUser) {
       return res.status(404).json('User not found');
     }
@@ -59,8 +59,8 @@ const login = async (req, res) => {
     if (!correctPassword) {
       return res.status(400).json('Invalid Credentials');
     }
-    const JwtToken = token({id: foundUser._id, role: foundUser.role});
-    res.status(200).json({token: JwtToken, userData: {id:foundUser._id, name: foundUser.name, role: foundUser.role, isVerified: foundUser.isActive}});
+    const JwtToken = token({ id: foundUser._id, role: foundUser.role });
+    res.status(200).json({ token: JwtToken, userData: { id: foundUser._id, name: foundUser.name, role: foundUser.role, isVerified: foundUser.isActive } });
   } catch (error) {
     console.log(error);
     res.status(500).json('Internal Server Error');
@@ -80,7 +80,7 @@ const deleteUser = async (req, res) => {
     if (!ObjectId.isValid(id)) {
       return res.status(400).json("ObjectId is not valid");
     }
-    const deleteUser = await User.findOneAndUpdate({_id: id }, deleteStatus);
+    const deleteUser = await User.findOneAndUpdate({ _id: id }, deleteStatus);
     if (deleteUser) {
       res.status(200).json(`The user: ${deleteUser._id} was successfully deleted`);
     } else {
@@ -119,7 +119,7 @@ const updateUser = async (req, res) => {
     if (!ObjectId.isValid(id)) {
       return res.status(400).json("ObjectId is not valid");
     }
-    const updateUser = await User.findOneAndUpdate({_id: id }, body, { new: true });
+    const updateUser = await User.findOneAndUpdate({ _id: id }, body, { new: true });
     if (updateUser) {
       res.status(200).json(updateUser);
     } else {
@@ -137,7 +137,7 @@ const activeAccount = async (req, res) => {
     if (!ObjectId.isValid(id)) {
       return res.status(400).json("ObjectId is not valid");
     }
-    const activeUser = await User.findOneAndUpdate({_id: id }, {isActive: true}, { new: true });
+    const activeUser = await User.findOneAndUpdate({ _id: id }, { isActive: true }, { new: true });
     if (activeUser) {
       res.status(200).json(activeUser);
     } else {
